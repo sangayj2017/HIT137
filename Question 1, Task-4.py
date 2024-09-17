@@ -32,14 +32,14 @@ drugs_counts = Counter()
 for chunk in tqdm(text_chunks, desc="Processing Chunks", unit="chunk"):
     doc_bc5cdr = ner_model_bc5cdr(chunk)
 
-# Extract tokens and their entity types from the biomedical NER model output
+    # Extract tokens and their entity types from the biomedical NER model output
     tokens_entities_bc5cdr = [(token.text, token.ent_type_) for token in doc_bc5cdr]
 
-# Separate diseases and drugs
+    # Separate diseases and drugs
     diseases_bc5cdr = [token[0] for token in tokens_entities_bc5cdr if token[1] == 'DISEASE']
     drugs_bc5cdr = [token[0] for token in tokens_entities_bc5cdr if token[1] == 'CHEMICAL']
 
-# Update counters
+    # Update counters
     diseases_counts.update(diseases_bc5cdr)
     drugs_counts.update(drugs_bc5cdr)
 
@@ -53,11 +53,11 @@ with open(output_csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
     csv_writer = csv.writer(csvfile)
     csv_writer.writerow(['Entity Type', 'Word', 'Count'])
 
-# Write diseases entries to CSV
+    # Write diseases entries to CSV
     for word, count in ordered_diseases:
         csv_writer.writerow(['Disease', word, count])
 
- # Write drugs entries to CSV
+    # Write drugs entries to CSV
     for word, count in ordered_drugs:
         csv_writer.writerow(['Drug', word, count])
 
