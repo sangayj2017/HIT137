@@ -1,4 +1,5 @@
 import spacy
+import pandas as pd
 
 # Load the SciSpaCy models
 nlp_sci_sm = spacy.load("en_core_sci_sm")
@@ -26,4 +27,7 @@ df_bc5cdr = pd.DataFrame(entities_bc5cdr, columns=['Entity', 'Label'])
 comparison = pd.concat([df_sci_sm, df_bc5cdr], keys=['SciSpaCy', 'BC5CDR'])
 comparison.to_csv('entity_comparison.csv')
 
-comparison
+# Save the comparison to a CSV file
+comparison.to_csv('entity_comparison.csv', index=False)
+
+print("Entity comparison saved to 'entity_comparison.csv'")
