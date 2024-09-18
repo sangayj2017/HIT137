@@ -6,8 +6,8 @@ from collections import Counter
 from tqdm import tqdm
 
 # Load the scispaCy models for biomedical NER
-ner_model_sci = spacy.load('en_core_sci_sm-0.5.4.tar.gz')
-ner_model_bc5cdr = spacy.load('en_ner_bc5cdr_md-0.5.4.tar.gz')
+ner_model_sci = spacy.load('en_core_sci_sm')
+ner_model_bc5cdr = spacy.load('en_ner_bc5cdr_md')
 
 # Increase the max_length limit for both models if necessary
 ner_model_sci.max_length = 1500000  # Adjust as needed
